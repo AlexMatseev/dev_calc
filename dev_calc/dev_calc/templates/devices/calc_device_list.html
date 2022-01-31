@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+    <h2>Расчеты себестоимости устройств: </h2>
+    <div class="product-block">
+            {% for calc in object_list %}
+            <div class="product-container">
+                <div class="product-title">
+                    <a href="{% url 'calc_device-detail' calc.pk %}">
+                        <p>{{ calc.name_calc }}</p> 
+                        <p>{{calc.device_id}}</p>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+                <p>Расчетов нет.</p>
+            {% endfor %}    
+    </div>
+    <p>
+        <a href="{% url 'calc_device-add' %}">Добавить новый расчет</a>
+    </p>
+{% endblock %}

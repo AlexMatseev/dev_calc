@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+    <h2>Компоненты: </h2>
+    <div class="product-block">
+            {% for component in object_list %}
+                <div class="product-container">
+                    
+                    <div class="product-title">
+                        <a href="{% url 'component-detail' component.pk %}">{{component.component_name }}</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Компонентов нет.</p>
+            {% endfor %}
+
+    </div>
+    <p>
+        <a href="{% url 'component-add' %}">Добавить компонент</a>
+    </p>
+{% endblock %}

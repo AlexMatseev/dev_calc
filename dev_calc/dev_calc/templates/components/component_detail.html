@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+    <h1>Компонент: {{component.component_name}}</h1>
+    <p>Цены:</p> 
+    {% for element in component.component_dict.all %}
+    <p><b>{{element.lot_id}}: {{element.price}}$</b></p>
+    {% endfor %}
+    <h2>Основные характеристики:</h2>
+        <table class="table">
+            <tr>
+                <th>Артикул</th>
+                <th>Vendor</th>
+                <th>Vendor P/N</th>
+                <th>Условия доставки</th>
+            </tr>
+        <tr>
+        <td>{{ component.sku }}</td>
+        <td>{{component.vendor}}</td>
+        <td>{{component.vendor_pn}}</td>
+        <td>{{component.term_delivery}}</td>
+        </tr>
+        </table>
+        {% for price in component.component_id.component_dict.all %}
+            {%if calculation.calc_lot == price.lot_id %}
+            {{price.price}}$
+            {% endif %}
+            {% endfor %}
+        <a href="{% url 'components-list' %}">К списку компонентов</a>
+{% endblock %}

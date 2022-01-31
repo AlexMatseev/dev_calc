@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% endblock %}
+{% block content %}
+    <h2>Создание расчета</h2>
+    <hr>
+    <div class="col-md-12">
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input class="save-btn" type="submit" value="Создать"/> <a href="{% url 'calc_device-list' %}">К списку расчетов</a>
+        </form>
+{% endblock %}

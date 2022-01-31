@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+    <h1>Устройство: {{calculation.device_id}}</h1>
+    <p>{{calculation.calc_lot}}</p>
+    <p>Себестоимость - <b>{{calculation.price_calc}}$</b></p>
+    <h2>Состав устройства:</h2>
+        <table class="table">
+            <tr>
+                <th> Название компонента</th>
+                <th>Артикул</th>
+                <th>Количество, шт</th>
+                <th>Цена, $</th>
+                <th>Vendor</th>
+                <th>Vendor P/N</th>
+                <th>Условия доставки</th>
+            </tr>
+        {% for component in components %}
+        <tr>
+        <td>{{component.component_id}}</td>
+        <td>{{component.component_id.sku}}</td>
+        <td>{{component.quantity}}</td>
+        <td>{% for price in component.component_id.component_dict.all %}
+            {%if calculation.calc_lot == price.lot_id %}
+            {{price.price}}$
+            {% endif %}
+            {% endfor %}
+        </td>
+        <td>{{component.component_id.vendor}}</td>
+        <td>{{component.component_id.vendor_pn}}</td>
+        <td>{{component.component_id.term_delivery}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+        <a href="{% url 'calc_device-list' %}">К списку рассчетов</a>
+{% endblock %}
