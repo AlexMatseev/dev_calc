@@ -4,6 +4,9 @@ from components.models import ComponentDict, Lots
 
 
 class Device(models.Model):
+    """
+    Модель устройств
+    """
     device_name = models.OneToOneField(ComponentDict, on_delete=models.PROTECT, verbose_name='Устройсво')
 
     def get_absolute_url(self):
@@ -14,6 +17,9 @@ class Device(models.Model):
 
 
 class ComponentDevice(models.Model):
+    """
+    Модель компонентов, которые входят в состав устройства
+    """
     device_id = models.ForeignKey(Device, on_delete=models.PROTECT, related_name='device', verbose_name='Устройство')
     component_id = models.ForeignKey(ComponentDict, on_delete=models.PROTECT, verbose_name='Компонент')
     quantity = models.IntegerField(verbose_name='Количество компонентов в устройстве')
@@ -23,6 +29,9 @@ class ComponentDevice(models.Model):
 
 
 class CalcDevice(models.Model):
+    """
+    Модель калькуляции стоимости устройства в зависимости от партии устройства
+    """
     name_calc = models.CharField(max_length=100, verbose_name='Название сборки')
     device_id = models.ForeignKey(Device, on_delete=models.CASCADE, verbose_name='Устройство')
     calc_lot = models.ForeignKey(Lots, on_delete=models.CASCADE, verbose_name='Партия')
