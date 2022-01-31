@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView, DetailView
@@ -6,12 +7,12 @@ from .forms import ComponentPriceFormSet
 from .models import ComponentDict, PriceComponent
 
 
-class ComponentList(ListView):
+class ComponentList(LoginRequiredMixin, ListView):
     model = ComponentDict
     template_name = 'components/component_list.html'
 
 
-class ComponentCreate(CreateView):
+class ComponentCreate(LoginRequiredMixin, CreateView):
     model = ComponentDict
     fields = ['component_name', 'sku', 'vendor', 'vendor_pn', 'term_delivery']
     success_url = reverse_lazy('components-list')
@@ -37,8 +38,7 @@ class ComponentCreate(CreateView):
         return super(ComponentCreate, self).form_valid(form)
 
 
-
-class ComponentUpdate(UpdateView):
+class ComponentUpdate(LoginRequiredMixin, UpdateView):
     model = ComponentDict
     fields = ['component_name', 'sku', 'vendor', 'vendor_pn', 'term_delivery']
     success_url = reverse_lazy('components-list')
@@ -63,12 +63,12 @@ class ComponentUpdate(UpdateView):
         return super(ComponentUpdate, self).form_valid(form)
 
 
-class ComponentDelete(DeleteView):
+class ComponentDelete(LoginRequiredMixin, DeleteView):
     model = ComponentDict
     success_url = reverse_lazy('components-list')
 
 
-class ComponentDetail(DetailView):
+class ComponentDetail(LoginRequiredMixin, DetailView):
     model = ComponentDict
     template_name = 'components/component_detail.html'
     context_object_name = 'component'

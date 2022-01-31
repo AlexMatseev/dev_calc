@@ -19,8 +19,14 @@
             <li><a href="{% url 'calc_device-list' %}">Себестоимость устройств</a></li>
             <li><a href="{% url 'calc_device-add' %}">Расчет себестоимости</a></li>
         </ul>
-        <ul>
-            <li>Login/LogOut</li>
+        <ul>{% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+            {% else %}
+            <li>
+                <a href="{% url 'login' %}">Вход</a>
+                <a href="{% url 'registration' %}">Регистрация</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
 <div id="content" class="container">

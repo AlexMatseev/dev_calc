@@ -142,3 +142,18 @@
   color: #06f;
   fill: #06f;
 }
+
+.user-title {
+  margin-bottom: 55px;
+}
+
+.user-form {
+  width: 500px;
+  margin: auto;
+}
+
+#id_group {
+ width:100%;
+ border-radius: 10px;
+ border: 1px solid #bbbbbb;
+}

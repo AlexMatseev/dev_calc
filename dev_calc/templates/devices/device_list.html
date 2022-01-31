@@ -2,6 +2,7 @@
 {% block title %}{% endblock %}
 {% block content %}
 
+{% if request.user.is_authenticated %}
     <h2>Устройства: </h2>
     <div class="product-block">
             {% for device in object_list %}
@@ -17,4 +18,10 @@
     <p>
         <a href="{% url 'device-add' %}">Добавить устройство</a>
     </p>
+{% else %}
+<h2>Отказано в доступе</h2>
+<p>Необходимо выполнить вход в систему или зарегистрироваться: </p>
+<p> <a href="{% url 'login' %}">Вход</a></p>
+<p><a href="{% url 'registration' %}">Регистрация</a></p>
+{% endif %}
 {% endblock %}
